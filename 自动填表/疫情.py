@@ -1,11 +1,10 @@
-import requests
-import json,urllib,time,http
-from bs4 import BeautifulSoup
-try:
+try :
+    import requests
+    import json,urllib,time,http
+
     filename = 'cookies.txt'
     cookie = http.cookiejar.LWPCookieJar(filename)
     handler = urllib.request.HTTPCookieProcessor(cookie)
-
 
     opener = urllib.request.build_opener(handler)
     with open("用户信息.txt",'r',encoding='utf8') as load_f:
@@ -15,19 +14,17 @@ try:
         print(resp.read().decode('utf-8'))
     cookie.save(ignore_discard=True, ignore_expires=True)
 
-
+    headers1 = ('User-Agent','Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3239.132 Safari/537.36',)
+    headers2=('X-Requested-With', 'XMLHttpRequest')
     cookie = http.cookiejar.LWPCookieJar()
     cookie.load('cookies.txt', ignore_discard=True, ignore_expires=True)
     handler = urllib.request.HTTPCookieProcessor(cookie)
     opener = urllib.request.build_opener(handler)
+    opener.addheaders = [headers1,headers2]
 
     with opener.open('https://app.upc.edu.cn/ncov/wap/default/index') as resp:
-        soup = BeautifulSoup(resp.read().decode('utf-8'),features="html.parser")
-        titles = soup.select("body  script") # CSS 选择器
-        str1=titles[4].string
-        result=json.loads(titles[4].string[str1.find("{"):str1.find("}",1600)+1])
+        result=json.loads(resp.read().decode("utf8"))['d']['info']
         
-
     with open("result.json",'r',encoding='utf8') as load_f:
         load_dict = json.load(load_f)
     load_dict["created"]=result["created"]
@@ -39,6 +36,5 @@ try:
     with opener.open('https://app.upc.edu.cn/ncov/wap/default/save', data=bytes(params, 'utf-8')) as resp:
         print(resp.read().decode('utf-8'))
 except :
-    print("发生错误，请检查是否修改用户信息中的账号密码，如出现bug，请联系开发人员！！！")
-finally :
-    input("请输入回车继续")
+    print("发生错误，请修改用户信息.txt")
+input("请按任意键继续")
