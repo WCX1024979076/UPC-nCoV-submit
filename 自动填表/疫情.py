@@ -28,7 +28,7 @@ try :
     with open("result.json",'r',encoding='utf8') as load_f:
         load_dict = json.load(load_f)
     load_dict["created"]=result["created"]
-    load_dict["date"]=result["date"]
+    load_dict["date"]=time.strftime("%Y%m%d", time.localtime())
     load_dict["id"]=result["id"]
 
 
