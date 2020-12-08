@@ -1,0 +1,3 @@
+#LWP-Cookies-2.0
+Set-Cookie3: UUkey=87692cf01975b562664a8e547807d29a; path="/"; domain="app.upc.edu.cn"; path_spec; expires="2021-12-07 16:25:55Z"; httponly=None; version=0
+Set-Cookie3: eai-sess=mncfc6fnbaesjs1ufnjkhdmjq3; path="/"; domain="app.upc.edu.cn"; path_spec; expires="2021-01-06 16:25:55Z"; HttpOnly=None; version=0
