@@ -3,7 +3,7 @@ name: ncov_submit
 on:
   push :
   schedule :
-    - cron : '0 23 * * *'
+    - cron : '0 24 * * *'
 
 jobs:
   build:
@@ -32,7 +32,7 @@ jobs:
       with:
         python-version: 3.9
 
-    # 编译安装
+    # 安装 requests
     - name : pip install requests
       run: |
         pip install requests

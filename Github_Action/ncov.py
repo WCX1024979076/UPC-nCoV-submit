@@ -29,12 +29,10 @@ with opener.open('https://app.upc.edu.cn/ncov/wap/default/index') as resp:
     result=json.loads(resp.read().decode("utf8"))['d']['oldInfo']
 with opener.open('https://app.upc.edu.cn/ncov/wap/default/index') as resp:
     result1=json.loads(resp.read().decode("utf8"))['d']['info']
-print(result)
-print(result1)
+
 result["date"]=time.strftime("%Y%m%d", time.localtime())
 result['created']=result1['created']
 result['id']=result1['id']
-print(result)
 
 with open(log_file,"a",encoding='utf8') as p :     
     jsObj = json.dumps(result)
