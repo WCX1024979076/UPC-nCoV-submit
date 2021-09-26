@@ -1,0 +1,43 @@
+name: ncov_submit
+
+on:
+  push
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    
+    #引用外部Action,拉取代码仓库到虚拟机工作目录
+    - name : pull UPC-nCoV-submit
+      run: |
+        mkdir ncov_submit
+        dir
+        cd ncov_submit
+        git init
+        git pull https://github.com/WCX1024979076/UPC-nCoV-submit.git
+        dir
+        
+
+    # 查看目录情况
+    - name: show dir
+      run: |
+        dir
+    
+    # 搭建环境 pyhton
+    - name: Set up Python 3.9
+      uses: actions/setup-python@v1
+      with:
+        python-version: 3.9
+
+    # 编译安装
+    - name : ncov_start
+      with : 
+        USER_TXT: ${{ secrets.USER }} # key
+      run: |
+        cd ncov_submit
+        cd Github_Action
+        echo $USER_TXT > user.txt
+        cat user.txt
+        python ncov.py
+
