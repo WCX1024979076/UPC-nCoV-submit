@@ -31,6 +31,11 @@ jobs:
         python-version: 3.9
 
     # 编译安装
+    - name : pip install requests
+      run: |
+        pip install requests
+      
+    # 运行
     - name : ncov_start
       env : 
         USER_TXT: ${{ secrets.USER }} # key
