@@ -32,7 +32,7 @@ jobs:
 
     # 编译安装
     - name : ncov_start
-      with : 
+      env : 
         USER_TXT: ${{ secrets.USER }} # key
       run: |
         cd ncov_submit
