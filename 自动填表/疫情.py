@@ -9,7 +9,11 @@ log_file="/home/UPC-nCoV-submit/result.txt"     #日志文件
 cookie = http.cookiejar.LWPCookieJar(cookie_file)
 handler = urllib.request.HTTPCookieProcessor(cookie)
 
+headers1 = ('User-Agent','Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3239.132 Safari/537.36',)
+headers2=('X-Requested-With', 'XMLHttpRequest')
+
 opener = urllib.request.build_opener(handler)
+opener.addheaders = [headers1,headers2]
 with open(user_file,'r',encoding='utf8') as load_f:
     userinfo = json.load(load_f)
 params = urllib.parse.urlencode(userinfo)
@@ -17,8 +21,6 @@ with opener.open('https://app.upc.edu.cn/uc/wap/login/check', data=bytes(params,
     print(resp.read().decode('utf-8'))
 cookie.save(ignore_discard=True, ignore_expires=True)
 
-headers1 = ('User-Agent','Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3239.132 Safari/537.36',)
-headers2=('X-Requested-With', 'XMLHttpRequest')
 cookie = http.cookiejar.LWPCookieJar()
 cookie.load(cookie_file, ignore_discard=True, ignore_expires=True)
 handler = urllib.request.HTTPCookieProcessor(cookie)
