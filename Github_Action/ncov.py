@@ -2,6 +2,9 @@ import requests
 import json,urllib,time,http
 import time 
 import math
+import random
+
+time.sleep(math.floor((random.random() * 3600))) #随机延时
 #使用前请修改以下路径，例如 C:/cookie.txt
 cookie_file='./cookies.txt' #保存cookie文件
 user_file="./user.txt"   #用户信息文件
